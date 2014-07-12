@@ -83,7 +83,7 @@ function notify(data) {
 	};
 	chrome.notifications.create("", opt, function(id) {	  
 	});
-	console.log(town_data);
+	console.info(town_data);
 }
 
 town_list = {"אילת 311":"חבל אילות",
