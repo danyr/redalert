@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Red Alert",
+  "description": "Red Alert",
+  "version": "0.1",
+  
+  "background": {
+    "persistent": true,
+    "scripts": ["jquery-2.1.1.js","bg.js"]
+  },
+  
+  "permissions": [
+    "http://www.oref.org.il/WarningMessages/*",
+	"http://www.isramedia.net/*",
+	"notifications" 
+  ],
+  "browser_action": {
+    "default_icon": "green.png",
+    "default_popup": "popup.html"
+  }
+}
