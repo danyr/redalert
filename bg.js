@@ -4,6 +4,7 @@
 		correctData = CorrectDataFormat(data.data);
 		if (correctData.length > 0) {
 			console.log(Date());
+			console.log("Raw alarms: " + data.data.toString());
 			console.log("All alarms: " + correctData.toString());
 			newAlarms = UpdateValues(correctData ,currentAlarmDict);
 			if (newAlarms.length>0) {
@@ -22,7 +23,7 @@ function CorrectDataFormat(rawData) {
 	if (rawData == null)
 		return null;
 	for(var i=0;i<rawData.length;i++) {
-		newData =$.extend(true, newData, rawData[i].split(","));		
+		newData = $.merge(newData, rawData[i].split(","));
 	}
 	newData = $.map(newData, $.trim);
 	return newData;
