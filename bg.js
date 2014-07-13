@@ -1,6 +1,8 @@
-﻿function CheckAlert() {
+﻿//dbg =1;
+function CheckAlert() {
 	$.getJSON( "http://www.oref.org.il/WarningMessages/alerts.json", function( data ) {
-		//data.data = ["אשקלון 235, עוטף עזה 238, מנשה 102"];
+		//if (dbg<=1 || dbg==4 || dbg==15) data.data = ["אשקלון 246, עוטף עזה 238, מנשה 102","דן 160"];
+		//dbg = dbg + 1;
 		correctData = CorrectDataFormat(data.data);
 		if (correctData.length > 0) {
 			console.log(Date());
@@ -35,6 +37,10 @@ function UpdateValues(data,dict) {
 	for(var i=0;i<data.length;i++) {
 		if (!(data[i] in dict)) {
 			newValues.push(data[i]);
+		} 
+		else if (dict[data[i]]*refreshTime<alarmValidTime-alarmCoolDownTime){
+			//if alarm is old enough we want to report it as new anyway
+			newValues.push(data[i]);
 		}
 		dict[data[i]] = Math.floor(alarmValidTime / refreshTime);
 	}
@@ -54,7 +60,8 @@ function RemoveStaleValues(data) {
 var alertCount = 0;
 var prevData = [];
 var refreshTime = 5000;
-var alarmValidTime = 30000; //30 seconds
+var alarmCoolDownTime = 30000; //30 seconds
+var alarmValidTime = 60000*60; //1 hour
 var currentAlarmDict = {};
 
 window.setInterval(CheckAlert, refreshTime);
